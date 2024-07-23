@@ -1,5 +1,5 @@
 function App() {
-  return <div>Giga Chat</div>;
+  return <div className="h-screen bg-neutral-100">Giga Chat</div>;
 }
 
 export default App;
