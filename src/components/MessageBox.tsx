@@ -29,12 +29,10 @@ const MessageBox = ({ messages }: Props) => {
   return (
     <div
       ref={messageBoxRef}
-      className="flex w-full flex-1 flex-col gap-2 overflow-y-auto rounded bg-white p-2 text-white shadow"
+      className="flex w-full flex-1 flex-col gap-2 overflow-y-auto rounded bg-white p-2 text-black shadow"
     >
       {messages.map((data) => (
-        <div key={data.id} className="w-3/4 rounded bg-neutral-500 p-2">
-          {data.content}
-        </div>
+        <div key={data.id}>{data.content}</div>
       ))}
     </div>
   );
