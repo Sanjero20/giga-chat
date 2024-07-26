@@ -1,5 +1,6 @@
 import { Message } from "@/App";
 import { useRef, useEffect } from "react";
+import ChatContainer from "./ChatContainer";
 
 interface Props {
   messages: Message[];
@@ -32,7 +33,7 @@ const MessageBox = ({ messages }: Props) => {
       className="flex w-full flex-1 flex-col gap-2 overflow-y-auto rounded bg-white p-2 text-black shadow"
     >
       {messages.map((data) => (
-        <div key={data.id}>{data.content}</div>
+        <ChatContainer key={data.id} data={data} />
       ))}
     </div>
   );

@@ -13,7 +13,7 @@ const MessageField = () => {
   const handleSendMessage = async () => {
     if (user) {
       await supabase
-        .from("message")
+        .from("messages")
         .insert({ user_id: user.id, content: value });
       setValue("");
     } else {
