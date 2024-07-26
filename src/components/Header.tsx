@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { supabase } from "@/lib/supabase";
 import { AuthContext } from "@/context/AuthContext";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const user = useContext(AuthContext);
@@ -15,16 +16,18 @@ const Header = () => {
     await supabase.auth.signOut();
   };
 
-  console.log(user);
-
   return (
     <header className="mt-2 flex items-center justify-between">
       <h1 className="text-xl font-bold uppercase">Giga Chat</h1>
 
       {user ? (
-        <button onClick={logout}>Logout</button>
+        <Button variant="outline" onClick={logout}>
+          Logout
+        </Button>
       ) : (
-        <button onClick={login}>Login</button>
+        <Button variant="outline" onClick={login}>
+          Login via Github
+        </Button>
       )}
     </header>
   );
