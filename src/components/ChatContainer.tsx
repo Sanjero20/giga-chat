@@ -19,14 +19,16 @@ const ChatContainer = ({ data }: Props) => {
   );
 
   return (
-    <div className={cn(isSameUser ? "ml-auto mr-0" : "", "w-3/4")}>
+    <div className={cn(isSameUser && "ml-auto mr-0", "w-3/4")}>
       <p className="mb-1 ml-1 text-xs text-neutral-500">
         {isSameUser ? "" : data.username}
       </p>
 
       <div className={userStyles}>
         <p>{data.content}</p>
-        <p className="text-xs">{data.created_at}</p>
+        <p className={cn(!isSameUser && "ml-auto mr-0", "mt-1 text-xs")}>
+          {data.created_at}
+        </p>
       </div>
     </div>
   );
