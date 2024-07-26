@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { Message } from "@/App";
 import { cn } from "@/lib/utils";
+import { getTimeFromNow } from "@/lib/time";
 
 interface Props {
   data: Message;
@@ -27,7 +28,7 @@ const ChatContainer = ({ data }: Props) => {
       <div className={userStyles}>
         <p>{data.content}</p>
         <p className={cn(!isSameUser && "ml-auto mr-0", "mt-1 text-xs")}>
-          {data.created_at}
+          {getTimeFromNow(data.created_at)}
         </p>
       </div>
     </div>
