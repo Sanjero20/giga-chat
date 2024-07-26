@@ -19,12 +19,21 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handlePayload = (payload: RealtimePostgresInsertPayload<any>) => {
-    const { new: data } = payload;
+  const handlePayload = async (payload: RealtimePostgresInsertPayload<any>) => {
+    const { new: message } = payload;
 
-    console.log(payload);
+    // Cant find a way to get the username directly
+    // so I just query the db for the username
+    const { data: user } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("id", message.user_id)
+      .single();
 
-    setMessages((prev) => [...prev, data]);
+    if (user) {
+      const { username } = user;
+      setMessages((prev) => [...prev, { ...message, username }]);
+    }
   };
 
   // Realtime database
