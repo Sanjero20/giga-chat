@@ -10,7 +10,7 @@ interface Props {
 const ChatContainer = ({ data }: Props) => {
   const user = useContext(AuthContext);
 
-  const isSameUser = user?.user_metadata.user_name === data.username;
+  const isSameUser = user?.id === data.user_id;
 
   const userStyles = cn(
     isSameUser ? "ml-auto mr-0 bg-primary" : "bg-neutral-400",
@@ -20,7 +20,9 @@ const ChatContainer = ({ data }: Props) => {
 
   return (
     <div className={cn(isSameUser ? "ml-auto mr-0" : "", "w-3/4")}>
-      <p className="mb-1 ml-1 text-xs text-neutral-500"> {data.username}</p>
+      <p className="mb-1 ml-1 text-xs text-neutral-500">
+        {isSameUser ? "" : data.username}
+      </p>
 
       <div className={userStyles}>
         <p>{data.content}</p>

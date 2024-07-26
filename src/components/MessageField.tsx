@@ -6,9 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { AuthContext } from "@/context/AuthContext";
 
 const MessageField = () => {
-  const user = useContext(AuthContext);
-
   const [value, setValue] = useState("");
+
+  const user = useContext(AuthContext);
 
   const handleSendMessage = async () => {
     if (user) {

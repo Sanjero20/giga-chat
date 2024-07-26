@@ -9,6 +9,7 @@ import MessageField from "@/components/MessageField";
 
 export interface Message {
   id: number;
+  user_id: string;
   username: string;
   content: string;
   created_at: string;
@@ -21,7 +22,9 @@ function App() {
   const handlePayload = (payload: RealtimePostgresInsertPayload<any>) => {
     const { new: data } = payload;
 
-    setMessages([]);
+    console.log(payload);
+
+    setMessages((prev) => [...prev, data]);
   };
 
   // Realtime database
@@ -44,7 +47,7 @@ function App() {
     const fetchData = async () => {
       const { data } = await supabase
         .from("messages")
-        .select("id, content, created_at, profiles(username)");
+        .select("id, user_id, content, created_at, profiles(username)");
 
       if (data) {
         const transformedData = data.map((item) => {
@@ -56,6 +59,7 @@ function App() {
           // Check if profile is defined and has username
           return {
             id: item.id,
+            user_id: item.user_id,
             username: profile.username,
             content: item.content,
             created_at: item.created_at,
