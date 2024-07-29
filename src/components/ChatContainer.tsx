@@ -18,19 +18,24 @@ const ChatContainer = ({ data }: Props) => {
   const userStyles = cn(
     isSameUser ? "ml-auto mr-0 bg-primary" : "bg-primary/70",
     "w-full rounded-lg p-2 text-sm text-white",
-    "flex flex-col gap-1",
+    "flex flex-col",
   );
 
   return (
-    <div className={cn(isSameUser && "ml-auto mr-0", "max-w-3/4 w-fit")}>
-      <p className="mb-1 ml-1 text-xs text-neutral-500">
+    <div className={cn(isSameUser && "ml-auto mr-0", "w-fit max-w-[70%]")}>
+      <p className="mb-1 ml-1 select-none text-xs text-neutral-500">
         {isSameUser ? "" : data.username}
       </p>
 
       <div className={userStyles}>
         <p>{filterBadWords(data.content)}</p>
 
-        <p className={cn(!isSameUser && "ml-auto mr-0", "mt-1 hidden text-xs")}>
+        <p
+          className={cn(
+            !isSameUser && "ml-auto mr-0",
+            "mt-1 select-none text-xs",
+          )}
+        >
           {getTimeFromNow(data.created_at)}
         </p>
       </div>
