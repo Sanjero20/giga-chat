@@ -16,6 +16,7 @@ export interface Message {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [messages, setMessages] = useState<Message[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -76,6 +77,7 @@ function App() {
         });
 
         setMessages(transformedData);
+        setIsLoading(false);
       }
     };
 
@@ -87,7 +89,7 @@ function App() {
       <div className="h-screen bg-neutral-300">
         <main className="mx-auto flex h-full max-w-lg flex-col gap-2 p-4">
           <Header />
-          <MessageBox messages={messages} />
+          <MessageBox messages={messages} isLoading={isLoading} />
           <MessageField />
         </main>
       </div>
