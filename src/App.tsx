@@ -84,7 +84,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className="h-screen bg-neutral-100">
+      <div className="h-screen bg-neutral-300">
         <main className="mx-auto flex h-full max-w-lg flex-col gap-2 p-4">
           <Header />
           <MessageBox messages={messages} />
