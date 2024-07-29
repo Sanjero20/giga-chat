@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { AuthContext } from "@/context/AuthContext";
 
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { AuthContext } from "@/context/AuthContext";
+import { Input } from "@/components/ui/input";
 
 const MessageField = () => {
   const [value, setValue] = useState("");
@@ -24,14 +24,18 @@ const MessageField = () => {
 
   return (
     <fieldset className="flex gap-2" disabled={!user}>
-      <Textarea
+      <Input
         className="h-10 min-h-10 w-full resize-none shadow"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Send a message..."
       />
 
-      <Button className="w-32 shadow" onClick={handleSendMessage}>
+      <Button
+        className="w-32 shadow"
+        onClick={handleSendMessage}
+        disabled={value == ""}
+      >
         Send
       </Button>
     </fieldset>
