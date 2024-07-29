@@ -24,9 +24,14 @@ const MessageField = () => {
     }
   };
 
+  if (!user)
+    return (
+      <div className="text-center text-neutral-500">Login to send messages</div>
+    );
+
   return (
     <form id="message-form" onSubmit={handleSubmit}>
-      <fieldset className="flex gap-1" disabled={!user}>
+      <fieldset className="flex gap-1">
         <Input
           className="h-10 min-h-10 w-full resize-none shadow"
           value={value}
