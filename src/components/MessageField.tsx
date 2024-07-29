@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { AuthContext } from "@/context/AuthContext";
 
@@ -10,7 +10,9 @@ const MessageField = () => {
 
   const user = useContext(AuthContext);
 
-  const handleSendMessage = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
     if (user) {
       await supabase
         .from("messages")
@@ -23,22 +25,20 @@ const MessageField = () => {
   };
 
   return (
-    <fieldset className="flex gap-2" disabled={!user}>
-      <Input
-        className="h-10 min-h-10 w-full resize-none shadow"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Send a message..."
-      />
+    <form id="message-form" onSubmit={handleSubmit}>
+      <fieldset className="flex gap-1" disabled={!user}>
+        <Input
+          className="h-10 min-h-10 w-full resize-none shadow"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Send a message..."
+        />
 
-      <Button
-        className="w-32 shadow"
-        onClick={handleSendMessage}
-        disabled={value == ""}
-      >
-        Send
-      </Button>
-    </fieldset>
+        <Button className="w-32 shadow" disabled={value == ""}>
+          Send
+        </Button>
+      </fieldset>
+    </form>
   );
 };
 
